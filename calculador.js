@@ -12,7 +12,7 @@ function Calculadora_De_Cuotas(){
 
 function Resultado(){
     Calculadora_De_Cuotas();
-    console.log("<------PLAN SOLICITADO------fran>")
+    console.log("<------PLAN SOLICITADO------>")
     console.log("Estas solicitando: $",Monto_Prestamo,);
     console.log("Elegiste pagarlo en ", Cuota, "Cuotas");
     console.log("El total a pagar por cuota es de $",Monto_Cuota);
