@@ -27,6 +27,7 @@ while(typeof("Nombre") != "string"){
 
 do{
     do{
+        console.log("");
         console.log("Hola", Nombre, "vamos a armar tu plan de cuotas");
         console.log("");
         Monto_Prestamo = Number(prompt("¿Que cantidad de dinero querés solicitar en esta oportunidad? Recordá que podes solicitar hasta $100.000 y no pueden ser números negativos"));
