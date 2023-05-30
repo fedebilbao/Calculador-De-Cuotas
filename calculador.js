@@ -17,6 +17,7 @@ function Calculadora_De_Cuotas(){
 
 function Resultado(){
     Calculadora_De_Cuotas();
+    console.log("");
     console.log("<------PLAN SOLICITADO------>")
     console.log("Estas solicitando: $",Monto_Prestamo,);
     console.log("Elegiste pagarlo en ", Cuota, "Cuotas");
@@ -97,4 +98,6 @@ do{
 
 console.log("");
 console.log("Gracias por utilizar nuestro calculador de cuotas");
+console.log("");
+console.log("El sistema otorgó:", Lista_Creditos.length, "créditos");
 console.log(Lista_Creditos);
