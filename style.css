@@ -1,0 +1,39 @@
+body{
+    background-color: oldlace;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    font-size: xx-large;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
+}
+
+p {font-style: italic;
+color: red;
+font-weight: bold;
+}
+
+h4{font-size: large;
+color: green;
+font-weight: bold;}
+
+div#NuevoCliente{
+    display: grid;
+    justify-content: center;
+    gap: 2px;
+}
+
+div#IngresoUsuario{
+    display: grid;
+    justify-content: center;
+    gap: 2px;
+}
+
+div#Ingreso{
+    margin-bottom: 1500px;
+}
