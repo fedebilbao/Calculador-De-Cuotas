@@ -116,11 +116,22 @@ function Calculadora_De_Cuotas(){
 
 function Arreglo(){
     Lista_Creditos = JSONCliente;
-    let Cliente_Uno = new Cliente (Nombre,DNI,Edad,Usuario,Contraseña,Monto_Prestamo,Cuota,Monto_Cuota);
-    Lista_Creditos.push ({Cliente_Uno});
-    console.log(Lista_Creditos); 
-    JSONCliente = JSON.stringify(Lista_Creditos);
-    localStorage.setItem("obj", JSONCliente);
+        if (Lista_Creditos = "null"){
+            Lista_Creditos = [];
+            let Cliente_Uno = new Cliente (Nombre,DNI,Edad,Usuario,Contraseña,Monto_Prestamo,Cuota,Monto_Cuota);
+            Lista_Creditos.push ({Cliente_Uno});
+            console.log(Lista_Creditos); 
+            JSONCliente = JSON.stringify(Lista_Creditos);
+            localStorage.setItem("obj", JSONCliente);
+        }
+        else{
+            let Cliente_Uno = new Cliente (Nombre,DNI,Edad,Usuario,Contraseña,Monto_Prestamo,Cuota,Monto_Cuota);
+            Lista_Creditos.push ({Cliente_Uno});
+            console.log(Lista_Creditos); 
+            JSONCliente = JSON.stringify(Lista_Creditos);
+            localStorage.setItem("obj", JSONCliente);
+        }
+
 }
 
 function Calcular(){
