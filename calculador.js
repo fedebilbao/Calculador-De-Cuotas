@@ -15,6 +15,18 @@ let A = 0;
 let JSONCliente;
 let obj;
 let ErrorNuevoCliente = 0;
+class Cliente{
+    constructor(Nombre,DNI,Edad,Usuario,Contraseña,Cuota,Monto_Cuota,Monto_Prestamo){
+    this.Nombre= Nombre;
+    this.DNI= DNI;
+    this.Edad= Edad;
+    this.Usuario= Usuario;
+    this.Contraseña= Contraseña;
+    this.Cuota=Cuota;
+    this.Monto_Cuota=Monto_Cuota;
+    this.Monto_Prestamo=Monto_Prestamo;
+    }
+}
 
 
 //FUNCIONES//
@@ -42,13 +54,22 @@ function Crear_Perfil(){
     }
     else{
         let PerfilCreado = document.getElementById("IngresoCorrecto");
-        PerfilCreado.innerHTML = "<h4>Su usuario se creó correctamente y se encuentra logeado</h4>"
+        /* PerfilCreado.innerHTML = "<h4>Su usuario se creó correctamente y se encuentra logeado</h4>" */
+        PerfilCreado.innerHTML = "<h4></h4>"
         A = 1;
         NuevoCliente.style.display = "none";
         let IngresoUsuario = document.getElementById("IngresoUsuario");
         IngresoUsuario.style.display = "none";
         let MarginBottom = document.getElementById("Ingreso");
-        MarginBottom.style.margin= "0px";      
+        MarginBottom.style.margin= "0px";
+
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Su usuario se creó correctamente y ya se encuentra logeado',
+            showConfirmButton: false,
+            timer: 1500
+          })      
     }
     
 }
@@ -67,13 +88,21 @@ function Ingreso(){
     
     else{
         let IngresoPerfil = document.getElementById("IngresoCorrecto");
-        IngresoPerfil.innerHTML ="<h4>Ingresó a nuestro sistema correctamente y ya se encuentra logeado</h4>";
+        /* IngresoPerfil.innerHTML ="<h4>Ingresó a nuestro sistema correctamente y ya se encuentra logeado</h4>"; */
+        IngresoPerfil.innerHTML ="<h4></h4>";
         A = 1;
         let NuevoCliente = document.getElementById("NuevoCliente");
         NuevoCliente.style.display = "none";
         IngresoUsuario.style.display = "none";
         let MarginBottom = document.getElementById("Ingreso");
-        MarginBottom.style.margin= "0px";        
+        MarginBottom.style.margin= "0px";
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Usted ingresó en nuestro sistema',
+            showConfirmButton: false,
+            timer: 1500
+          })        
     }
     
 }
@@ -86,18 +115,7 @@ function Calculadora_De_Cuotas(){
 }
 
 function Arreglo(){
-    class Cliente{
-        constructor(Nombre,DNI,Edad,Usuario,Contraseña,Cuota,Monto_Cuota,Monto_Prestamo){
-        this.Nombre= Nombre;
-        this.DNI= DNI;
-        this.Edad= Edad;
-        this.Usuario= Usuario;
-        this.Contraseña= Contraseña;
-        this.Cuota=Cuota;
-        this.Monto_Cuota=Monto_Cuota;
-        this.Monto_Prestamo=Monto_Prestamo;
-        }
-    }
+    Lista_Creditos = JSONCliente;
     let Cliente_Uno = new Cliente (Nombre,DNI,Edad,Usuario,Contraseña,Monto_Prestamo,Cuota,Monto_Cuota);
     Lista_Creditos.push ({Cliente_Uno});
     console.log(Lista_Creditos); 
@@ -152,14 +170,42 @@ function SolicitarCredito(){
 
     else{
         let Otorgado = document.getElementById ("Otorgado");
-        Otorgado.innerHTML = "Su crédito fue otorgado correctamente, el monto solicitado es: $" + Monto_Prestamo + " a pagar en " + Cuota + " cuotas de $" + Monto_Cuota;
+        /* Otorgado.innerHTML = "Su crédito fue otorgado correctamente, el monto solicitado es: $" + Monto_Prestamo + " a pagar en " + Cuota + " cuotas de $" + Monto_Cuota; */
+        Otorgado.innerHTML = "";
         Otorgado.style.color = "green";
         Arreglo();
         Calculo.style.display ="none";
         btn_SolicitarCredito.style.display="none";
+        
+        Swal.fire(
+            'Su crédito fue otorgado correctamente',
+            'el monto solicitado es $ '+ Monto_Prestamo + ' a pagar en ' + Cuota + ' cuotas de $ ' + Monto_Cuota,
+            'success'
+          )
     }
 
 }
+
+(async () =>{
+    const { value: accept } = await Swal.fire({
+    title: 'Terminos y condiciones',
+    input: 'checkbox',
+    inputValue: 1,
+    inputPlaceholder:
+      'Estoy de acuerdo con los terminos y condiciones',
+    confirmButtonText:
+      'Continue <i class="fa fa-arrow-right"></i>',
+    inputValidator: (result) => {
+      return !result && 'Usted debe aceptar los terminos de nuestra pagina'
+    }
+  })
+  if (accept) {
+    Swal.fire('Usted aceptó nuestros terminos y condiciones')
+  };
+})()
+
+
+
 
 
 JSONCliente = localStorage.getItem("obj");
@@ -179,5 +225,32 @@ btn_Calcular.addEventListener("click", Calcular)
 let btn_SolicitarCredito = document.getElementById("btn_SolicitarCredito");
 btn_SolicitarCredito.addEventListener("click", SolicitarCredito);
 
+let btn_FiltrarCreditos = document.getElementById("btn_FiltrarCreditos");
+btn_FiltrarCreditos.addEventListener("click", FiltrarCreditos );
+
+
 /* Falta realizar un .filter para mostrar los créditos otorgados por usuario en pantalla*/
+function FiltrarCreditos (){
+    const filtro = Lista_Creditos.filter(credito => credito.Nombre === Nombre);
+    console.log(filtro);
+}
+
+/* FETCH, estuve buscando una API relacionada a mi trabajo y encontré del BCRA, NOSIS, VERAZ y pensé en utilizar un buscador de personas según su DNI pero todas ellas son pagas o se debe completar un proceso para utilizarlas por que son datos sensibles. Por ello utilice una API que no tiene relación pero que se pueda ver el uso del tema. */
+
+function AleatorioRick(){
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
+      let Personaje = getRandomInt(19);
+
+    let RickAndMorty_Img = document.getElementById ("RickAndMorty");
+
+    fetch ("https://rickandmortyapi.com/api/character")
+    .then(response => response.json())
+    .then (data => RickAndMorty_Img.innerHTML = "<h2>En hora buena, obtuviste a "+ data.results[Personaje].name +"</h2> <img src=" + data.results[Personaje].image +">" );
+}
+
+let btn_RickAndMorty = document.getElementById ("btn_RickAndMorty");
+btn_RickAndMorty.addEventListener("click", AleatorioRick);
 

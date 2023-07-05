@@ -1,16 +1,17 @@
 body{
-    background-color: oldlace;
+    background-color: rgb(167, 205, 255);
 }
 
 header{
     display: flex;
     justify-content: center;
+    background-color: rgb(19, 128, 253);
 }
 
 h1 {
-    font-size: xx-large;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 56px;
     font-weight: 900;
+    font-family: 'Caprasimo', cursive;
 }
 
 p {font-style: italic;
@@ -37,3 +38,10 @@ div#IngresoUsuario{
 div#Ingreso{
     margin-bottom: 1500px;
 }
+
+div#RickAndMorty{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
