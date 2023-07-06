@@ -115,18 +115,20 @@ function Calculadora_De_Cuotas(){
 }
 
 function Arreglo(){
+    JSONCliente = localStorage.getItem("obj");
+    JSONCliente = JSON.parse(JSONCliente);
     Lista_Creditos = JSONCliente;
-        if (Lista_Creditos = "null"){
+        if (Lista_Creditos == null){
             Lista_Creditos = [];
             let Cliente_Uno = new Cliente (Nombre,DNI,Edad,Usuario,Contraseña,Monto_Prestamo,Cuota,Monto_Cuota);
-            Lista_Creditos.push ({Cliente_Uno});
+            Lista_Creditos.push (Cliente_Uno);
             console.log(Lista_Creditos); 
             JSONCliente = JSON.stringify(Lista_Creditos);
             localStorage.setItem("obj", JSONCliente);
         }
         else{
             let Cliente_Uno = new Cliente (Nombre,DNI,Edad,Usuario,Contraseña,Monto_Prestamo,Cuota,Monto_Cuota);
-            Lista_Creditos.push ({Cliente_Uno});
+            Lista_Creditos.push (Cliente_Uno);
             console.log(Lista_Creditos); 
             JSONCliente = JSON.stringify(Lista_Creditos);
             localStorage.setItem("obj", JSONCliente);
@@ -219,8 +221,6 @@ function SolicitarCredito(){
 
 
 
-JSONCliente = localStorage.getItem("obj");
-JSONCliente = JSON.parse(JSONCliente);
 
 // BOTONES //
 
@@ -244,6 +244,33 @@ btn_FiltrarCreditos.addEventListener("click", FiltrarCreditos );
 function FiltrarCreditos (){
     const filtro = Lista_Creditos.filter(credito => credito.Nombre === Nombre);
     console.log(filtro);
+    let tabla="";
+    let fila="";
+
+    let Crear_Tabla = filtro.forEach(element => {
+            fila = "<td>";
+            fila+= element.Nombre;
+            fila+= "</td>"
+    
+            fila+= "<td>"
+            fila+= element.Monto_Prestamo;
+            fila+= "</td>"
+    
+            fila+= "<td>"
+            fila+= element.Cuota;
+            fila+= "</td>"
+    
+            fila+= "<td>"
+            fila+= element.Monto_Cuota;
+            fila+= "</td>"
+    
+            tabla += fila;
+            console.log(tabla)
+            return tabla
+        });
+        
+    htmltabla = document.getElementById("tbody_table");
+    htmltabla.innerHTML =tabla; 
 }
 
 /* FETCH, estuve buscando una API relacionada a mi trabajo y encontré del BCRA, NOSIS, VERAZ y pensé en utilizar un buscador de personas según su DNI pero todas ellas son pagas o se debe completar un proceso para utilizarlas por que son datos sensibles. Por ello utilice una API que no tiene relación pero que se pueda ver el uso del tema. */
